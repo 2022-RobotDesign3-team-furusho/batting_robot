@@ -4,11 +4,13 @@
   <version>0.0.0</version>
   <description>The batting_robot package</description>
 
-  <maintainer email="s21c1103bk@gmail.com">kenzo-fujisaki</maintainer>
+  <maintainer email="ken.nfsc10@gmail.com">Kenzo Fujisaki</maintainer>
 
+  <license>NON-COMMERCIAL LICENSE AGREEMENT</license>
+  <author email="tiryoh@gmail.com">Daisuke Sato</author>
+  <author email="nomura@rt-net.jp">Hiroyuki Nomura</author>
 
-  <license>TODO</license>
-
+  <buildtool_depend>catkin</buildtool_depend>
   <build_depend>rospy</build_depend>
   <build_export_depend>rospy</build_export_depend>
   <exec_depend>rospy</exec_depend>
