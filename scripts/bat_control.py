@@ -126,7 +126,7 @@ def main():
             else:
                 print("[Action Mode]"
                       + "[Next Pose:" + str(pose_index) + " of " + str(poses_num) + "]")
-                print("[q]: Quit, [m]: switch to teaching Mode, [a]: play All pose,")
+                print("[q]: Quit, [m]: switch to teaching Mode, [a]: １つ目のバッティング, [b]: 2つ目のバッティング, [c]: 3つ目のバッティング,")
 
             print("Keyboard input >>>")
             do_restart = False
@@ -220,6 +220,31 @@ def main():
                 do_restart = True
                 continue
 
+            if input_code == ord('b') or input_code == ord('B'):
+                print("play All poses")
+                all_joint_values = data_base.load_all_joint_values()
+                if all_joint_values:
+                    for i, joint_values in enumerate(all_joint_values):
+                        print("Play: " + str(i+1) + " of " + str(poses_num))
+                        arm.set_joint_value_target(joint_values[0])
+                        arm.go()
+                        gripper.set_joint_value_target(joint_values[1])
+                        gripper.go()
+                do_restart = True
+                continue
+
+            if input_code == ord('c') or input_code == ord('C'):
+                print("play All poses")
+                all_joint_values = data_base.load_all_joint_values()
+                if all_joint_values:
+                    for i, joint_values in enumerate(all_joint_values):
+                        print("Play: " + str(i+1) + " of " + str(poses_num))
+                        arm.set_joint_value_target(joint_values[0])
+                        arm.go()
+                        gripper.set_joint_value_target(joint_values[1])
+                        gripper.go()
+                do_restart = True
+                continue
 
     # SRDFに定義されている"vertical"の姿勢にする
     arm.set_named_target("vertical")
