@@ -206,7 +206,7 @@ def main():
                 continue
 
         else:
-            # 保存したアーム、グリッパー角度を連続再生する
+            # １つ目のバッティング
             if input_code == ord('a') or input_code == ord('A'):
                 print("play All poses")
                 all_joint_values = data_base.load_all_joint_values()
@@ -219,7 +219,7 @@ def main():
                         gripper.go()
                 do_restart = True
                 continue
-
+            # ２つ目のバッティング
             if input_code == ord('b') or input_code == ord('B'):
                 print("play All poses")
                 all_joint_values = data_base.load_all_joint_values()
@@ -232,7 +232,7 @@ def main():
                         gripper.go()
                 do_restart = True
                 continue
-
+            # ３つ目のバッティング
             if input_code == ord('c') or input_code == ord('C'):
                 print("play All poses")
                 all_joint_values = data_base.load_all_joint_values()
