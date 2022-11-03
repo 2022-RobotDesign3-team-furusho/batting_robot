@@ -31,20 +31,6 @@ class TeachingDataBase(object):
         # アームの各関節角度と、グリッパー開閉角度を配列に保存する
         self._teaching_joint_values.append([arm, gripper])
 
-    def load_joint_values(self):
-        # 保存した角度情報を返す
-        # 配列のインデックスが末尾まで来たら、インデックスを0に戻す
-        # 何も保存していない場合はFalseを返す
-        if self._teaching_joint_values:
-            joint_values = self._teaching_joint_values[self._teaching_index]
-            self._teaching_index += 1
-
-            if self._teaching_index >= len(self._teaching_joint_values):
-                self._teaching_index = 0
-            return joint_values
-        else:
-            rospy.logwarn("Joint Values is nothing")
-            return False
 
     def load_all_joint_values(self):
         # 保存した角度情報をすべて返す
@@ -140,7 +126,7 @@ def main():
             else:
                 print("[Action Mode]"
                       + "[Next Pose:" + str(pose_index) + " of " + str(poses_num) + "]")
-                print("[q]: Quit, [m]: switch to teaching Mode, [p]: Play 1 pose, [a]: play All pose, [l]: Loop play on/off")
+                print("[q]: Quit, [m]: switch to teaching Mode, [a]: play All pose,")
 
             print("Keyboard input >>>")
             do_restart = False
@@ -220,18 +206,6 @@ def main():
                 continue
 
         else:
-            # 保存したアーム、グリッパー角度を取り出す
-            if input_code == ord('p') or input_code == ord('P'):
-                print("Play 1 pose")
-                joint_values = data_base.load_joint_values()
-                if joint_values:
-                    arm.set_joint_value_target(joint_values[0])
-                    arm.go()
-                    gripper.set_joint_value_target(joint_values[1])
-                    gripper.go()
-                do_restart = True
-                continue
-
             # 保存したアーム、グリッパー角度を連続再生する
             if input_code == ord('a') or input_code == ord('A'):
                 print("play All poses")
@@ -245,38 +219,6 @@ def main():
                         gripper.go()
                 do_restart = True
                 continue
-
-            # 保存したアーム、グリッパー角度をループ再生する
-            if input_code == ord('l') or input_code == ord('L'):
-                print("Loop play")
-
-                do_loop_playing = not do_loop_playing
-                
-                if do_loop_playing:
-                    print("ON")
-                else:
-                    print("OFF")
-                    # 再び再生しないようにsleepを設ける
-                    rospy.sleep(1)
-                    do_restart = True
-                    continue
-
-            # ループ再生
-            if do_loop_playing:
-                joint_values = data_base.load_joint_values()
-                if joint_values:
-                    print("Play " + str(pose_index) + " of " + str(poses_num))
-
-                    arm.set_joint_value_target(joint_values[0])
-                    arm.go()
-                    gripper.set_joint_value_target(joint_values[1])
-                    gripper.go()
-                else:
-                    # 姿勢が保存されていなかったらループ再生を終了する
-                    print("Loop play OFF")
-                    do_loop_playing = False
-                    do_restart = True
-                    continue
 
 
     # SRDFに定義されている"vertical"の姿勢にする
