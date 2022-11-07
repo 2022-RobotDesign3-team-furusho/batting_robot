@@ -154,7 +154,7 @@ def main():
             if is_teaching_mode:
                 print("[Teaching Mode]"
                       + "[Next Pose:" + str(pose_index) + " of " + str(poses_num) + "]")
-                print("[q]: Quit, [m]: switch to action Mode, [s]: Save1, [x]: Save2, [z]:Save3, [d]: Delete")
+                print("[q]: Quit, [m]: switch to action Mode, [s]: Save1, [z]: Save2, [x]:Save3, [d]: Delete")
             else:
                 print("[Action Mode]"
                       + "[Next Pose:" + str(pose_index) + " of " + str(poses_num) + "]")
