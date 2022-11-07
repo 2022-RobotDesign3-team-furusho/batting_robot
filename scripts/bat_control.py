@@ -24,7 +24,6 @@ import sys, tty, termios, select
 class TeachingDataBase(object):
 
     def __init__(self):
-        # 初期化
         self._teaching_joint_values1 = []
         self._teaching_joint_values2 = []
         self._teaching_joint_values3 = []
