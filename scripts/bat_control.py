@@ -24,34 +24,66 @@ import sys, tty, termios, select
 class TeachingDataBase(object):
     def __init__(self):
 
-        self._teaching_joint_values = []
+        self._teaching_joint_values1 = []
+        self._teaching_joint_values2 = []
+        self._teaching_joint_values3 = []
         self._teaching_index = 0
 
-    def save_joint_values(self, arm, gripper):
+    def save_joint_values1(self, arm, gripper):
         # アームの各関節角度と、グリッパー開閉角度を配列に保存する
-        self._teaching_joint_values.append([arm, gripper])
+        self._teaching_joint_values1.append([arm, gripper])
+
+    def save_joint_values2(self, arm, gripper):
+        # アームの各関節角度と、グリッパー開閉角度を配列に保存する
+        self._teaching_joint_values2.append([arm, gripper])
+
+    def save_joint_values3(self, arm, gripper):
+        # アームの各関節角度と、グリッパー開閉角度を配列に保存する
+        self._teaching_joint_values3.append([arm, gripper])
 
 
-    def load_all_joint_values(self):
+    def load_all_joint_values1(self):
         # 保存した角度情報をすべて返す
         # 何も保存していない場合はFalseを返す
-        if self._teaching_joint_values:
-            return self._teaching_joint_values
+        if self._teaching_joint_values1:
+            return self._teaching_joint_values1
+
+        else:
+            rospy.logwarn("Joint Values is nothing")
+            return False
+
+    def load_all_joint_values2(self):
+        # 保存した角度情報をすべて返す
+        # 何も保存していない場合はFalseを返す
+        if self._teaching_joint_values2:
+            return self._teaching_joint_values2
+
+        else:
+            rospy.logwarn("Joint Values is nothing")
+            return False
+
+    def load_all_joint_values3(self):
+        # 保存した角度情報をすべて返す
+        # 何も保存していない場合はFalseを返す
+        if self._teaching_joint_values3:
+            return self._teaching_joint_values3
+
         else:
             rospy.logwarn("Joint Values is nothing")
             return False
 
     def delete_joint_values(self):
         # 角度情報が格納された配列を初期化する
-        self._teaching_joint_values = []
+        self._teaching_joint_values1 = []
+        self._teaching_joint_values2 = []
+        self._teaching_joint_values3 = []
         self._teaching_index = 0
 
     def get_current_index(self):
         return self._teaching_index
 
     def get_num_of_poses(self):
-        return len(self._teaching_joint_values)
-
+        return len(self._teaching_joint_values1)
 
 def getch(timeout):
     # 1文字のキーボード入力を返す
@@ -122,7 +154,7 @@ def main():
             if is_teaching_mode:
                 print("[Teaching Mode]"
                       + "[Next Pose:" + str(pose_index) + " of " + str(poses_num) + "]")
-                print("[q]: Quit, [m]: switch to action Mode, [s]: Save, [d]: Delete")
+                print("[q]: Quit, [m]: switch to action Mode, [s]: Save1, [x]: Save2, [z]:Save3, [d]: Delete")
             else:
                 print("[Action Mode]"
                       + "[Next Pose:" + str(pose_index) + " of " + str(poses_num) + "]")
@@ -181,7 +213,7 @@ def main():
 
 
         if is_teaching_mode:
-            # 現在のアーム姿勢、グリッパー角度を保存する
+            # １つ目の保存
             if input_code == ord('s') or input_code == ord('S'):
                 print("Save joint values")
                 # アームの角度が制御範囲内にない場合、例外が発生する
@@ -191,14 +223,48 @@ def main():
 
                     arm.set_joint_value_target(arm_joint_values)
                     gripper.set_joint_value_target(gripper_joint_values)
-                    data_base.save_joint_values(arm_joint_values, gripper_joint_values)
+                    data_base.save_joint_values1(arm_joint_values, gripper_joint_values)
                 except moveit_commander.exception.MoveItCommanderException:
                     print("Error setting joint target. Is the target within bounds?")
 
                 do_restart = True
                 continue
 
-            # 保存したアーム姿勢、グリッパー角度を削除する
+            # ２つ目の保存
+            if input_code == ord('z') or input_code == ord('Z'):
+                print("Save joint values")
+                # アームの角度が制御範囲内にない場合、例外が発生する
+                try:
+                    arm_joint_values = arm.get_current_joint_values()
+                    gripper_joint_values = gripper.get_current_joint_values()
+
+                    arm.set_joint_value_target(arm_joint_values)
+                    gripper.set_joint_value_target(gripper_joint_values)
+                    data_base.save_joint_values2(arm_joint_values, gripper_joint_values)
+                except moveit_commander.exception.MoveItCommanderException:
+                    print("Error setting joint target. Is the target within bounds?")
+
+                do_restart = True
+                continue
+
+            # ３つ目の保存
+            if input_code == ord('x') or input_code == ord('X'):
+                print("Save joint values")
+                # アームの角度が制御範囲内にない場合、例外が発生する
+                try:
+                    arm_joint_values = arm.get_current_joint_values()
+                    gripper_joint_values = gripper.get_current_joint_values()
+
+                    arm.set_joint_value_target(arm_joint_values)
+                    gripper.set_joint_value_target(gripper_joint_values)
+                    data_base.save_joint_values3(arm_joint_values, gripper_joint_values)
+                except moveit_commander.exception.MoveItCommanderException:
+                    print("Error setting joint target. Is the target within bounds?")
+
+                do_restart = True
+                continue
+
+            # 保存したアーム姿勢、グリッパー角度を削除する          あとで！！！！！！
             if input_code == ord('d') or input_code == ord('D'):
                 print("\nDelete joint values")
                 data_base.delete_joint_values()
@@ -209,7 +275,7 @@ def main():
             # １つ目のバッティング
             if input_code == ord('a') or input_code == ord('A'):
                 print("play All poses")
-                all_joint_values = data_base.load_all_joint_values()
+                all_joint_values = data_base.load_all_joint_values1()
                 if all_joint_values:
                     for i, joint_values in enumerate(all_joint_values):
                         print("Play: " + str(i+1) + " of " + str(poses_num))
@@ -222,7 +288,7 @@ def main():
             # ２つ目のバッティング
             if input_code == ord('b') or input_code == ord('B'):
                 print("play All poses")
-                all_joint_values = data_base.load_all_joint_values()
+                all_joint_values = data_base.load_all_joint_values2()
                 if all_joint_values:
                     for i, joint_values in enumerate(all_joint_values):
                         print("Play: " + str(i+1) + " of " + str(poses_num))
@@ -235,7 +301,7 @@ def main():
             # ３つ目のバッティング
             if input_code == ord('c') or input_code == ord('C'):
                 print("play All poses")
-                all_joint_values = data_base.load_all_joint_values()
+                all_joint_values = data_base.load_all_joint_values3()
                 if all_joint_values:
                     for i, joint_values in enumerate(all_joint_values):
                         print("Play: " + str(i+1) + " of " + str(poses_num))
