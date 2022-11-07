@@ -31,6 +31,7 @@ class TeachingDataBase(object):
 
     def save_joint_values1(self, arm, gripper):
         # アームの各関節角度と、グリッパー開閉角度を配列に保存する
+        gripper = [0.13,0.13]
         self._teaching_joint_values1.append([arm, gripper])
 
     def save_joint_values2(self, arm, gripper):
@@ -130,7 +131,7 @@ def main():
     do_loop_playing = False
 
     # 何かを掴んでいた時のためにハンドを開く
-    gripper.set_joint_value_target([0.9, 0.9])
+    gripper.set_joint_value_target([0.12, 0.12])
     gripper.go()
 
     # SRDFに定義されている"home"の姿勢にする
@@ -219,11 +220,12 @@ def main():
                 # アームの角度が制御範囲内にない場合、例外が発生する
                 try:
                     arm_joint_values = arm.get_current_joint_values()
-                    gripper_joint_values = gripper.get_current_joint_values()
+                    gripper_joint_values = gripper.set_joint_value_target([0.12, 0.12])
 
                     arm.set_joint_value_target(arm_joint_values)
-                    gripper.set_joint_value_target(gripper_joint_values)
                     data_base.save_joint_values1(arm_joint_values, gripper_joint_values)
+                    print("アーム",arm_joint_values)
+                    print("グリッパー",gripper_joint_values)
                 except moveit_commander.exception.MoveItCommanderException:
                     print("Error setting joint target. Is the target within bounds?")
 
@@ -241,6 +243,8 @@ def main():
                     arm.set_joint_value_target(arm_joint_values)
                     gripper.set_joint_value_target(gripper_joint_values)
                     data_base.save_joint_values2(arm_joint_values, gripper_joint_values)
+                    print("アーム",arm_joint_values)
+                    print("グリッパー",gripper_joint_values)
                 except moveit_commander.exception.MoveItCommanderException:
                     print("Error setting joint target. Is the target within bounds?")
 
@@ -258,6 +262,8 @@ def main():
                     arm.set_joint_value_target(arm_joint_values)
                     gripper.set_joint_value_target(gripper_joint_values)
                     data_base.save_joint_values3(arm_joint_values, gripper_joint_values)
+                    print("アーム",arm_joint_values)
+                    print("グリッパー",gripper_joint_values)
                 except moveit_commander.exception.MoveItCommanderException:
                     print("Error setting joint target. Is the target within bounds?")
 

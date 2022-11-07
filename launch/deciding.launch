@@ -1,5 +1,5 @@
 <launch>
-  <node name="preset_reconfigure" pkg="crane_x7_control" type="preset_reconfigure.py" required="true" />
+  <node name="gain" pkg="batting_robot" type="gain.py" required="true" />
 
   <node name="bat_control" pkg="batting_robot" type="bat_control.py" required="true" output="screen" />
 </launch>
