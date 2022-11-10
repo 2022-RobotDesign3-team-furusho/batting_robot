@@ -1,12 +1,12 @@
 #! /usr/bin/env python3
 
 import rospy
-import sys, tty, termios, select
+import sys
 import actionlib
-import moveit_commander
+import math
 from trajectory_msgs.msg import JointTrajectoryPoint
 from control_msgs.msg import GripperCommandAction,GripperCommandGoal
-from control_msgs.msg import FollowJointTrajectoryAction,FollowJointTrajectoryActionGoal
+from control_msgs.msg import FollowJointTrajectoryAction,FollowJointTrajectoryGoal
 #from moveit_msgs.msg import GetCartesianPath
 
 class Swing(object):
@@ -29,12 +29,12 @@ class Swing(object):
             rospy.signal_shutdown("Action Server not found.")
             sys.exit(1)
     
-
+    
     def setup(self):
         global point
         global goal
         point = JointTrajectoryPoint()
-        goal = FollowJointTrajectoryActionGoal()
+        goal = FollowJointTrajectoryGoal()
         goal.trajectory.joint_names = ["crane_x7_shoulder_fixed_part_pan_joint","crane_x7_shoulder_revolute_part_tilt_joint","crane_x7_upper_arm_revolute_part_twist_joint","crane_x7_upper_arm_revolute_part_rotate_joint","crane_x7_lower_arm_fixed_part_joint","crane_x7_lower_arm_revolute_part_joint","crane_x7_wrist_joint"]
 
     def setup2(self,secs2,time,sleep):
@@ -52,70 +52,118 @@ class Swing(object):
     #センター方向の動き
     def go_center(self):
         global joint_values
+    
+        print("GO!!")
+
+        self.gripper_goal.command.position = math.radians(12.12)
+
+        print("構え")
+        self.setup()
+        joint_values = [0.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
+        self.setup2(3.0, 100.0, 1)
+
+        print("スイング")
+        self.setup()
+        joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
+        self.setup2(0.7, 100.0, 0.5)
+
+        self.setup()
+        joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
+        self.setup2(0.7, 100.0, 1)
+
+
+        self.setup()
+        joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
+        self.setup2(3.0, 100.0, 1)
+
+        return self._client.get_result()
 
     #引っ張り方向の動き
     def go_pull(self):
         global joint_values
 
+        print("GO!!")
+
+        self.gripper_goal.command.position = math.radians(12.12)
+
+        print("構え")
+        self.setup()
+        joint_values = [math.radians(5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
+        self.setup2(3.0, 100.0, 1)
+
+        print("スイング")
+        self.setup()
+        joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
+        self.setup2(0.7, 100.0, 0.5)
+
+        self.setup()
+        joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
+        self.setup2(0.7, 100.0, 1)
+
+
+        self.setup()
+        joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
+        self.setup2(3.0, 100.0, 1)
+
+        return self._client.get_result()
+
     #流し方向の動き
     def go_sink(self):
         global joint_values
 
-# 1文字のキーボード入力を返す関数
-def getch(timeout):
-    fd = sys.stdin.fileno()
-    old = termios.tcgetattr(fd)
-    try:
-        tty.setraw(fd)
-        (result_stdin, w, x) = select.select([sys.stdin], [], [], timeout)
-        if len(result_stdin):
-            return result_stdin[0].read(1)
-        else:
-            return False
+        print("GO!!")
 
-        # return sys.stdin.read(1)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old)
+        self.gripper_goal.command.position = math.radians(12.12)
+
+        print("構え")
+        self.setup()
+        joint_values = [math.radians(-5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-110)] #角度指定部
+        self.setup2(3.0, 100.0, 1)
+
+        print("スイング")
+        self.setup()
+        joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-110)] #角度指定部
+        self.setup2(0.7, 100.0, 0.5)
+
+        self.setup()
+        joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-110)] #角度指定部
+        self.setup2(0.7, 100.0, 1)
 
 
+        self.setup()
+        joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
+        self.setup2(3.0, 100.0, 1)
+
+        return self._client.get_result()
+
+    def feedback(self,msg):
+        print("feedback callback")
 
 def main():
     completed = False
-    do_shutdown = False
     arm_swing = Swing()
 
     if completed:
         pass
     else:
-        while do_shutdown is False:
+        print("[c]: センター返し, [p]: 引っ張り, [s]:流し打ち")
         # 文字入力
-            input_key = getch(0.1) # 一定時間入力がなければFalseを返す
-            input_code = ""
-            if input_key is not False:
-                print(input_key)
-                input_code = ord(input_key)
+        input_key = input() # 一定時間入力がなければFalseを返す
 
-            if input_code == ord('c') or input_code == ord('C'):
-                print("center")
-                Swing.go_center()
-                do_shutdown = True
+        if input_key == 'c':
+            print("center")
+            arm_swing.go_center()
 
-            if input_code == ord('p') or input_code == ord('P'):
-                print("pull")
-                Swing.go_pull()
-                do_shutdown = True
+        if input_key == 'p':
+            print("pull")
+            arm_swing.go_pull()
 
-            if input_code == ord('s') or input_code == ord('S'):
-                print("sink")
-                Swing.go_sink()
-                do_shutdown = True
-
+        if input_key == 's':
+            print("sink")
+            arm_swing.go_sink()
 
 
 if __name__ == '__main__':
+    print("start")
     rospy.init_node("swing")
-    try:
-        if not rospy.is_shutdown():
-            main()
-    except rospy.ROSInterruptExeption:
-        pass
+    main()
