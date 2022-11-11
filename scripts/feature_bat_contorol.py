@@ -51,6 +51,7 @@ class Swing(object):
 
     #センター方向の動き
     def go_center(self):
+
         global joint_values
     
         print("GO!!")
@@ -62,21 +63,25 @@ class Swing(object):
         joint_values = [0.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
-        print("スイング")
-        self.setup()
-        joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
-        self.setup2(0.7, 100.0, 0.5)
+        print("[s]: バッティング開始")
+        starat_center = input()
+        if starat_center == 's':
 
-        self.setup()
-        joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
-        self.setup2(0.7, 100.0, 1)
+            print("スイング")
+            self.setup()
+            joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
+            self.setup2(0.7, 100.0, 0.5)
+
+            self.setup()
+            joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
+            self.setup2(0.7, 100.0, 1)
 
 
-        self.setup()
-        joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
-        self.setup2(3.0, 100.0, 1)
+            self.setup()
+            joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
+            self.setup2(3.0, 100.0, 1)
 
-        return self._client.get_result()
+            return self._client.get_result()
 
     #引っ張り方向の動き
     def go_pull(self):
@@ -91,21 +96,25 @@ class Swing(object):
         joint_values = [math.radians(5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
-        print("スイング")
-        self.setup()
-        joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
-        self.setup2(0.7, 100.0, 0.5)
+        print("[s]: バッティング開始")
+        starat_center = input()
+        if starat_center == 's':
 
-        self.setup()
-        joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
-        self.setup2(0.7, 100.0, 1)
+            print("スイング")
+            self.setup()
+            joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
+            self.setup2(0.7, 100.0, 0.5)
+
+            self.setup()
+            joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
+            self.setup2(0.7, 100.0, 1)
 
 
-        self.setup()
-        joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
-        self.setup2(3.0, 100.0, 1)
+            self.setup()
+            joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
+            self.setup2(3.0, 100.0, 1)
 
-        return self._client.get_result()
+            return self._client.get_result()
 
     #流し方向の動き
     def go_sink(self):
@@ -120,21 +129,25 @@ class Swing(object):
         joint_values = [math.radians(-5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-110)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
-        print("スイング")
-        self.setup()
-        joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-110)] #角度指定部
-        self.setup2(0.7, 100.0, 0.5)
+        print("[s]: バッティング開始")
+        starat_center = input()
+        if starat_center == 's':
 
-        self.setup()
-        joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-110)] #角度指定部
-        self.setup2(0.7, 100.0, 1)
+            print("スイング")
+            self.setup()
+            joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-110)] #角度指定部
+            self.setup2(0.7, 100.0, 0.5)
+
+            self.setup()
+            joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-110)] #角度指定部
+            self.setup2(0.7, 100.0, 1)
 
 
-        self.setup()
-        joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
-        self.setup2(3.0, 100.0, 1)
+            self.setup()
+            joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
+            self.setup2(3.0, 100.0, 1)
 
-        return self._client.get_result()
+            return self._client.get_result()
 
     def feedback(self,msg):
         print("feedback callback")
