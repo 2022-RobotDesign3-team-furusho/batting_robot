@@ -70,7 +70,7 @@ class Swing(object):
             print("スイング")
             self.setup()
             joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
-            self.setup2(0.7, 100.0, 0.2)
+            self.setup2(0.7, 100.0, 0)
 
             self.setup()
             joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
@@ -103,7 +103,7 @@ class Swing(object):
             print("スイング")
             self.setup()
             joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
-            self.setup2(0.7, 100.0, 0.2)
+            self.setup2(0.7, 100.0, 0)
 
             self.setup()
             joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
@@ -136,7 +136,7 @@ class Swing(object):
             print("スイング")
             self.setup()
             joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-120)] #角度指定部
-            self.setup2(0.7, 100.0, 0.2)
+            self.setup2(0.7, 100.0, 0)
 
             self.setup()
             joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-120)] #角度指定部
