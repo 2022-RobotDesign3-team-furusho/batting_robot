@@ -93,7 +93,7 @@ class Swing(object):
 
         print("構え")
         self.setup()
-        joint_values = [math.radians(5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
+        joint_values = [math.radians(5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-40)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
         print("[s]: バッティング開始")
@@ -102,11 +102,11 @@ class Swing(object):
 
             print("スイング")
             self.setup()
-            joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
+            joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-40)] #角度指定部
             self.setup2(0.7, 100.0, 0)
 
             self.setup()
-            joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-70)] #角度指定部
+            joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-40)] #角度指定部
             self.setup2(0.1, 100.0, 1)
 
 
@@ -126,7 +126,7 @@ class Swing(object):
 
         print("構え")
         self.setup()
-        joint_values = [math.radians(-5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-120)] #角度指定部
+        joint_values = [math.radians(-5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-140)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
         print("[s]: バッティング開始")
@@ -135,11 +135,11 @@ class Swing(object):
 
             print("スイング")
             self.setup()
-            joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-120)] #角度指定部
+            joint_values = [1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-140)] #角度指定部
             self.setup2(0.7, 100.0, 0)
 
             self.setup()
-            joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-120)] #角度指定部
+            joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-140)] #角度指定部
             self.setup2(0.1, 100.0, 1)
 
 
