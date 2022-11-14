@@ -7,7 +7,6 @@ import math
 from trajectory_msgs.msg import JointTrajectoryPoint
 from control_msgs.msg import GripperCommandAction,GripperCommandGoal
 from control_msgs.msg import FollowJointTrajectoryAction,FollowJointTrajectoryGoal
-#from moveit_msgs.msg import GetCartesianPath
 
 class Swing(object):
     #コンストラクタ
@@ -44,7 +43,6 @@ class Swing(object):
         point.time_from_start = rospy.Duration(secs = secs2)
         goal.trajectory.points.append(point)
         self._client.send_goal(goal)
-
         self._client.wait_for_result(timeout=rospy.Duration(time))
         self.gripper_client.send_goal(self.gripper_goal,feedback_cb=self.feedback)
         rospy.sleep(sleep)
@@ -53,9 +51,7 @@ class Swing(object):
     def go_center(self):
 
         global joint_values
-    
-        print("GO!!")
-
+        print("batting start")
         self.gripper_goal.command.position = math.radians(12.12)
 
         print("構え")
@@ -86,9 +82,7 @@ class Swing(object):
     #引っ張り方向の動き
     def go_pull(self):
         global joint_values
-
-        print("GO!!")
-
+        print("batting start")
         self.gripper_goal.command.position = math.radians(12.12)
 
         print("構え")
@@ -119,9 +113,7 @@ class Swing(object):
     #流し方向の動き
     def go_sink(self):
         global joint_values
-
-        print("GO!!")
-
+        print("batting start")
         self.gripper_goal.command.position = math.radians(12.12)
 
         print("構え")
