@@ -9,7 +9,7 @@ from control_msgs.msg import GripperCommandAction,GripperCommandGoal
 from control_msgs.msg import FollowJointTrajectoryAction,FollowJointTrajectoryGoal
 
 class Swing(object):
-    #コンストラクタ
+
     def __init__(self):
         self._client = actionlib.SimpleActionClient("/crane_x7/arm_controller/follow_joint_trajectory", FollowJointTrajectoryAction)
 
@@ -27,8 +27,7 @@ class Swing(object):
             rospy.logerr("Exiting - Gripper Action Server Not Found.")
             rospy.signal_shutdown("Action Server not found.")
             sys.exit(1)
-    
-    
+
     def setup(self):
         global point
         global goal
@@ -39,7 +38,7 @@ class Swing(object):
     def setup2(self,secs2,time,sleep):
         for i, p in enumerate(joint_values):
             point.positions.append(p)
-        
+
         point.time_from_start = rospy.Duration(secs = secs2)
         goal.trajectory.points.append(point)
         self._client.send_goal(goal)
