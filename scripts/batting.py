@@ -9,7 +9,7 @@ from control_msgs.msg import GripperCommandAction,GripperCommandGoal
 from control_msgs.msg import FollowJointTrajectoryAction,FollowJointTrajectoryGoal
 
 class Swing(object):
-    #コンストラクタ
+
     def __init__(self):
         self._client = actionlib.SimpleActionClient("/crane_x7/arm_controller/follow_joint_trajectory", FollowJointTrajectoryAction)
 
@@ -27,7 +27,6 @@ class Swing(object):
             rospy.logerr("Exiting - Gripper Action Server Not Found.")
             rospy.signal_shutdown("Action Server not found.")
             sys.exit(1)
-    
     
     def setup(self):
         global point
@@ -151,9 +150,9 @@ def main():
     if completed:
         pass
     else:
+        #打つ方向を決める文字入力
         print("[c]: センター返し, [p]: 引っ張り, [s]:流し打ち")
-        # 文字入力
-        input_key = input() # 一定時間入力がなければFalseを返す
+        input_key = input()
 
         if input_key == 'c':
             print("center")
