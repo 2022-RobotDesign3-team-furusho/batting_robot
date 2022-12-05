@@ -171,3 +171,4 @@ if __name__ == '__main__':
     print("start")
     rospy.init_node("swing")
     main()
+    rospy.spin()

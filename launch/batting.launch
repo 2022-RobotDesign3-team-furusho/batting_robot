@@ -1,0 +1,5 @@
+<launch>
+  <node name="ready" pkg="batting_robot" type="ready.py" required="true" />
+
+  <node name="batting" pkg="batting_robot" type="batting.py" required="true" output="screen" />
+</launch>
