@@ -8,8 +8,8 @@
 ---
 
 ## 動作確認済み環境
-  * Ubuntu 20.04.5LTS
-  * Noetic Ninjemys
+  * OS: Ubuntu 20.04.5LTS
+  * ROS: Noetic Ninjemys
 
 ---
 
