@@ -108,5 +108,5 @@ $ roslaunch crane_x7_bringup demo.launch fake_execution:=false
 
 ## ライセンス
 
-本リポジトリは株式会社アールティ様のライセンスに則って作成しています。本リポジトリのデータ等に関するライセンスは、[LICENSE](https://rt-net.jp/products/crane-x7/)をご参照下さい。
+本リポジトリは株式会社アールティ様のライセンスに則って作成しています。本リポジトリのデータ等に関するライセンスは、[LICENSE](https://github.com/2022-RobotDesign3-team-furusho/batting_robot/blob/main/LICENSE)をご参照下さい。
 
