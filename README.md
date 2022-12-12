@@ -2,7 +2,7 @@
 
 2022年度設計製作論3
 本リポジトリはcrane_x7でバッティングをするROS1パッケージです。
-本パッケージは<a href= "https://github.com/rt-net/crane_x7_ros.html" >rt-net/crane_x7_ros</a    > を元に、未来ロボティクス学科で開講された講義内でのチーム
+本パッケージは[crane_x7](https://rt-net.jp/products/crane-x7/)を元に、未来ロボティクス学科で開講された講義内でのチーム
 2022-RobotDesign3-team-furushoが作成したものになります。
 
 ---
@@ -108,5 +108,5 @@ $ roslaunch crane_x7_bringup demo.launch fake_execution:=false
 
 ## ライセンス
 
-本リポジトリは株式会社アールティ様のライセンスに則って作成しています。本リポジトリのデータ等に関するライセンスは、<a href= "https://github.com/2022-RobotDesign3-team-furusho/batting_robot/blob/main/LICENSE.html" >LICENSE</a>をご参照下さい。
+本リポジトリは株式会社アールティ様のライセンスに則って作成しています。本リポジトリのデータ等に関するライセンスは、[LICENSE](https://rt-net.jp/products/crane-x7/)をご参照下さい。
 
