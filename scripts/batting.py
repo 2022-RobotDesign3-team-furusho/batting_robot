@@ -169,6 +169,6 @@ def main():
 
 if __name__ == '__main__':
     print("start")
-    rospy.init_node("swing")
+    rospy.init_node("batting")
     main()
     rospy.spin()
