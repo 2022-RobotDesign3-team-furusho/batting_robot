@@ -96,7 +96,7 @@ $ catkin_make
 
 PCにUSBを接続し、/dev/ttyUSB0へのアクセス
 ```
-$ sudo chmod 666 /dev/ttyUSB*
+$ sudo chmod 666 /dev/ttyUSB0
 ```
 
 crane_x7を起動
