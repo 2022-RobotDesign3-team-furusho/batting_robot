@@ -1,6 +1,7 @@
 # scripts
 
-本パッケージは<a href= "https://github.com/rt-net/crane_x7_ros.html" >rt-net/crane_x7_ros</a    >を元に、未来ロボティクス学科で開講された講義内でチームふるしょーが作成したものです
+本パッケージは<a href= "https://github.com/rt-net/crane_x7_ros.html" >rt-net/crane_x7_ros</a    >を元に、未来ロボティクス学科で開講された講義内でチーム
+2022-RobotDesign3-team-furushoが作成したものです
 
 ---
 
