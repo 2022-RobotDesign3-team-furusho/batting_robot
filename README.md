@@ -2,7 +2,7 @@
 
 2022年度設計製作論3
 本リポジトリはcrane_x7でバッティングをするROS1パッケージです。
-本パッケージは[crane_x7](https://github.com/rt-net/crane_x7_ros)を元に、未来ロボティクス学科で開講された講義内でのチーム
+本パッケージは[rt-net/crane_x7_ros](https://github.com/rt-net/crane_x7_ros)を元に、未来ロボティクス学科で開講された講義内でのチーム
 2022-RobotDesign3-team-furushoが作成したものになります。
 
 ---
