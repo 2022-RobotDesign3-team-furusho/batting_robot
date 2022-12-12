@@ -10,6 +10,7 @@
 ## 動作確認済み環境
   * OS: Ubuntu 20.04.5LTS
   * ROS: Noetic Ninjemys
+  * RealSense
 
 ---
 
