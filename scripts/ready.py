@@ -4,6 +4,7 @@ import rospy
 import sys
 import actionlib
 import math
+import os
 from trajectory_msgs.msg import JointTrajectoryPoint
 from control_msgs.msg import GripperCommandAction,GripperCommandGoal
 from control_msgs.msg import FollowJointTrajectoryAction,FollowJointTrajectoryGoal
@@ -64,14 +65,14 @@ class Swing(object):
 def main():
     completed = False
     arm_swing = Swing()
-
     if completed:
         pass
     else:
         arm_swing.search_position()
+        os.popen("rosrun batting_robot grab.py")
 
 if __name__ == '__main__':
     print("start")
-    rospy.init_node("swing")
+    rospy.init_node("ready")
     main()
     rospy.spin()
