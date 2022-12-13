@@ -137,7 +137,7 @@ class Swing(object):
             self.setup()
             joint_values = [0.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
             self.setup2(3.0, 100.0, 1)
-            
+
             return self._client.get_result()
 
     #バットを離してverticalの姿勢に戻る
@@ -145,6 +145,10 @@ class Swing(object):
         global joint_values
         print("finish batting")
         self.gripper_goal.command.position = math.radians(12.12)
+
+        effort  = 1
+        self.gripper_goal.command.position = math.radians(80.0)
+        self.gripper_goal.command.max_effort = effort
 
         self.setup()
         joint_values = [0.0, math.radians(-20), 0.0, math.radians(-130), 0.0, math.radians(-35), math.radians(-90)] #角度指定部
