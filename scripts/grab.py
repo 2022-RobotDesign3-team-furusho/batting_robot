@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 #from moveit_commander import robot
 import rospy
@@ -49,11 +48,11 @@ def get(topic_x, topic_y):
         #フラグ処理(一度だけ以下の処理を行う)
         completed = True
         flag = False
-        setup(0.7, 0.2+f_y, 0.0+f_x, 0.13)#一気にアプローチしない(安全対策)
-        setup(0.7, 0.2+f_y, 0.0+f_x, 0.11)
-        hand(0.25, 1.0) #掴む
+        setup(0.7, 0.18+f_y, 0.0+f_x, 0.13)#一気にアプローチしない(安全対策)
+        setup(0.7, 0.18+f_y, 0.0+f_x, 0.085)
+        hand(0.16, 1.0) #掴む
         #batting.py起動
-        os.popen("rosrun batting_robot batting.py")
+        os.popen("rosrun batting_robot batting.py ")
 
     print("done")
 
@@ -90,7 +89,7 @@ def hand(state, time):
     gripper.go()
 
 if __name__ == "__main__":
-    rospy.init_node("search")
+    rospy.init_node("grab")
     print("OK!!")
     main()
     rospy.spin()

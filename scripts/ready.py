@@ -48,15 +48,11 @@ class Swing(object):
         rospy.sleep(sleep)
 
     #バットを探す姿勢にする
-    def search_position(self):
-
+    def set(self):
+        print("GO grab")
         global joint_values
-        print("batting start")
-        self.gripper_goal.command.position = math.radians(12.12)
-
-        print("構え")
         self.setup()
-        joint_values = [0.0, math.radians(-10), 0.0, math.radians(-90), 0.0, math.radians(-80), math.radians(-90)] #角度指定部
+        joint_values = [0.0, math.radians(0), 0.0, math.radians(-103), 0.0, math.radians(-80), math.radians(-90)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
     def feedback(self,msg):
@@ -68,7 +64,7 @@ def main():
     if completed:
         pass
     else:
-        arm_swing.search_position()
+        arm_swing.set()
         os.popen("rosrun batting_robot grab.py")
 
 if __name__ == '__main__':
