@@ -19,7 +19,7 @@ class ImageConvert(object):
         try:
             rospy.spin()
         except KeyboardInterrupt:
-            print("aaaa")
+            print("error")
             cv2.destroyAllWindows()
     
     def color_callback_and_convert(self, topic):
@@ -35,10 +35,10 @@ class ImageConvert(object):
         #hsv色空間内で設定した色を抽出
         bule_min = np.array([90, 60, 0]) #青色のしきい値
         bule_max = np.array([150, 255, 255]) #青色のしきい値
-        flypan_mask = cv2.inRange(hsv_image, bule_min, bule_max)
+        bat_mask = cv2.inRange(hsv_image, bule_min, bule_max)
 
         #hsv色空間内で設定した色ｎイメージを抽出
-        cv_image_2 = cv2.bitwise_and(cv_image_color, cv_image_color, mask = flypan_mask)
+        cv_image_2 = cv2.bitwise_and(cv_image_color, cv_image_color, mask = bat_mask)
 
         #グレースケールに変換(後述の処理に必要)
         gray_image = cv2.cvtColor(cv_image_2, cv2.COLOR_BGR2GRAY)
