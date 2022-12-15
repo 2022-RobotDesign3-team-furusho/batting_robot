@@ -90,7 +90,7 @@ def hand(state, time):
     gripper.go()
 
 if __name__ == "__main__":
-    rospy.init_node("search")
+    rospy.init_node("grab")
     print("OK!!")
     main()
     rospy.spin()
