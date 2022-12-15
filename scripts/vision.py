@@ -97,7 +97,7 @@ class ImageConvert(object):
 if __name__ == "__main__":
     global flag
     flag = True
-    rospy.init_node("color")
+    rospy.init_node("vision")
     image_convert = ImageConvert() #インスタンス化(色画像取得)
     image_convert.main()
     rospy.spin()
