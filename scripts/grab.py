@@ -1,7 +1,5 @@
 #! /usr/bin/env python3
-# -*- coding: utf-8 -*-
 
-#from moveit_commander import robot
 import rospy
 import moveit_commander
 from gazebo_msgs.msg import ModelStates

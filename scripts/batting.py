@@ -51,7 +51,7 @@ class Swing(object):
 
         global joint_values
         print("batting start")
-        self.gripper_goal.command.position = math.radians(12.12)
+        self.gripper_goal.command.position = math.radians(10.10)
 
         print("構え")
         self.setup()
@@ -82,7 +82,7 @@ class Swing(object):
     def go_pull(self):
         global joint_values
         print("batting start")
-        self.gripper_goal.command.position = math.radians(12.12)
+        self.gripper_goal.command.position = math.radians(10.10)
 
         print("構え")
         self.setup()
@@ -113,7 +113,7 @@ class Swing(object):
     def go_sink(self):
         global joint_values
         print("batting start")
-        self.gripper_goal.command.position = math.radians(12.12)
+        self.gripper_goal.command.position = math.radians(10.10)
 
         print("構え")
         self.setup()
