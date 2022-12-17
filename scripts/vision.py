@@ -12,8 +12,8 @@ class ImageConvert(object):
     def __init__(self):
         self.bridge = CvBridge()
         self.subscribed_image_color = rospy.Subscriber("/camera/color/image_raw", Image, self.color_callback_and_convert)
-        self.publisher_hsv_image_x = rospy.Publisher("subscribed_image_color_x", Float32, queue_size=10)
-        self.publisher_hsv_image_y = rospy.Publisher("subscribed_image_color_y", Float32, queue_size=10)
+        self.publisher_hsv_image_x = rospy.Publisher("camera_bat_pose_x", Float32, queue_size=10)
+        self.publisher_hsv_image_y = rospy.Publisher("camera_bat_pose_y", Float32, queue_size=10)
 
     def main(self):
         try:

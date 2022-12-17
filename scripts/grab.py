@@ -13,8 +13,8 @@ import os
 #color.pyからカメラ座標を受け取る
 def search():
     global completed
-    sub_x = message_filters.Subscriber("subscribed_image_color_x", Float32)
-    sub_y = message_filters.Subscriber("subscribed_image_color_y", Float32)
+    sub_x = message_filters.Subscriber("camera_bat_pose_x", Float32)
+    sub_y = message_filters.Subscriber("camera_bat_pose_y", Float32)
     sub_n = message_filters.ApproximateTimeSynchronizer([sub_x, sub_y], 100, 0.1, allow_headerless=True)
     #一度受け取ったら適当に値を入れてget関数を動かす
     if completed:
