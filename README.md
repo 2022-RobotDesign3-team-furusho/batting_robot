@@ -48,13 +48,13 @@ $ catkin_make
 
 ### バットの配置
 
-安全なバッティングを行うため以下のバットを以下の配置に置いて下さい
+安全なバッティングを行うため以下のバットを以下の配置に置いて下さい。
 
 <img src = "https://user-images.githubusercontent.com/85381022/208228201-0811efe5-6967-4446-a335-874f53e00f22.png" width = "40%">
 
 ### RealSenseの取り付け方法
 
-RealSenseは以下のように取り付け
+RealSenseは以下のように取り付けます。
 
 <img src = "https://user-images.githubusercontent.com/85381022/208228303-b1115b70-8dcb-4ab6-838f-cd98910c7edb.jpg" width = "30%">
 
