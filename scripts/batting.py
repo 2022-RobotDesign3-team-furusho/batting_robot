@@ -58,9 +58,9 @@ class Swing(object):
         joint_values = [0.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
-        print("[s]: バッティング開始")
+        print("[G]: バッティング開始")
         starat_center = input()
-        if starat_center == 's':
+        if starat_center == 'g':
 
             print("スイング")
             self.setup()
@@ -89,9 +89,9 @@ class Swing(object):
         joint_values = [math.radians(5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-40)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
-        print("[s]: バッティング開始")
+        print("[G]: バッティング開始")
         starat_center = input()
-        if starat_center == 's':
+        if starat_center == 'g':
 
             print("スイング")
             self.setup()
@@ -120,9 +120,9 @@ class Swing(object):
         joint_values = [math.radians(-5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-140)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
-        print("[s]: バッティング開始")
+        print("[g]: バッティング開始")
         starat_center = input()
-        if starat_center == 's':
+        if starat_center == 'g':
 
             print("スイング")
             self.setup()
