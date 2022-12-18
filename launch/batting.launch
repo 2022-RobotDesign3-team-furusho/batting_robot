@@ -1,7 +1,9 @@
 <launch>
-  <node name="ready" pkg="batting_robot" type="ready.py" />
+  <group ns="image_tutorial1">
+    <node name="ready" pkg="batting_robot" type="ready.py" />
 
-  <node name="search_bat" pkg="batting_robot" type="earch_bat" />
+    <node name="search_bat" pkg="batting_robot" type="earch_bat.py" />
 
-  <node name="batting" pkg="batting_robot" type="batting.py" />
+    <node name="batting" pkg="batting_robot" type="batting.py" />
+  </group>
 </launch>
