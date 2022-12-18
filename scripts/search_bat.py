@@ -75,9 +75,9 @@ class Swing(object):
         self.setup3(6.0, 100.0, 1)
         print("探索終了")
 
-        print("とまれええ")
-        time.sleep(2)
-        self._client.cancel_all_goals()
+        #print("とまれええ")
+        #time.sleep(2)
+        #self._client.cancel_all_goals()
 
 
     def feedback(self,msg):

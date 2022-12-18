@@ -54,20 +54,19 @@ class ImageConvert(object):
         contours = list(filter(lambda x: cv2.contourArea(x) > 3000, contours))
 
         #hsv_imageに輪郭を描画(赤色)
-        cv2.drawContours(hsv_image, contours, -1, color=(0, 0, 255), thickness=6)
+        cv2.drawContours(hsv_image, contours, -1, color=(0, 255, 0), thickness=6)
 
         #抽出した輪郭の重心を取得
         coordinates = cv2.moments(contours[0])
         x = int(coordinates["m10"]/coordinates["m00"])
         y = int(coordinates["m01"]/coordinates["m00"])
 
-        #hsv_imageに重心を描画(水色)
-        cv2.rectangle(hsv_image, (x + 10, y + 10), (x -10, y - 10), (255, 255, 0), thickness = 6)
+        
 
         px_x = 640 / 2 #色画像のx座標の中心点
         px_y = 480 / 2 #色画像のy座標の中心点
         error_px_x = 70 #RealSenseの中心からのカメラズレ
-        error_px_y = 90 #手前方向にフライパンがあった時にきれいにアプローチできるようにする
+        error_px_y = 90 
         neo_x = x - px_x - error_px_x #xローカル座標
         neo_y = y - px_y #yカメラ座標
         print("move_x:", neo_x, "move_y:", neo_y)
