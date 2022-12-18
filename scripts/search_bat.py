@@ -7,8 +7,20 @@ import math
 from trajectory_msgs.msg import JointTrajectoryPoint
 from control_msgs.msg import GripperCommandAction,GripperCommandGoal
 from control_msgs.msg import FollowJointTrajectoryAction,FollowJointTrajectoryGoal
-import input_blue
 import time
+import input_blue
+import moveit_commander
+from gazebo_msgs.msg import ModelStates
+import geometry_msgs.msg
+from tf.transformations import quaternion_from_euler
+from std_msgs.msg import Float32
+import message_filters
+import os
+
+def search():
+    global completed
+    sub_x = message_filters.Subscriber("subscribed_image_color_x", Float32)
+    
 
 class Swing(object):
 
@@ -58,26 +70,29 @@ class Swing(object):
         self.gripper_client.send_goal(self.gripper_goal,feedback_cb=self.feedback)
         rospy.sleep(sleep)
 
-    #バット探索の動き
+    #バットを掴む動き
     def search_bat(self):
 
         global joint_values
-        self.gripper_goal.command.position = math.radians(12.12)
+        self.gripper_goal.command.position = math.radians(40.40)
 
         print("探索開始")
         self.setup()
-        joint_values = [math.radians(90), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
-        self.setup2(6.0, 100.0, 1)
+        joint_values = [math.radians(0), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
+        self.setup2(3.0, 100.0, 1)
 
-        print("探索中")
+        self.gripper_goal.command.position = math.radians(10.10)
+
         self.setup()
-        joint_values = [math.radians(-90), math.radians(-10), 0.0, math.radians(-90), 0.0, math.radians(-80), math.radians(-90)] #角度指定部
-        self.setup3(6.0, 100.0, 1)
-        print("探索終了")
+        joint_values = [math.radians(0), math.radians(-45), 0.0, math.radians(-90), 0.0, math.radians(-53), math.radians(-90)] #角度指定部
+        self.setup2(3.0, 100.0, 1)
 
-        print("とまれええ")
-        time.sleep(2)
-        self._client.cancel_all_goals()
+        self.gripper_goal.command.position = math.radians(10.10)
+
+        self.setup()
+        joint_values = [math.radians(0), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
+        self.setup2(3.0, 100.0, 1)
+
 
 
     def feedback(self,msg):

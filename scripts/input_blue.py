@@ -67,8 +67,8 @@ class ImageConvert(object):
         px_x = 640 / 2 #色画像のx座標の中心点
         px_y = 480 / 2 #色画像のy座標の中心点
         error_px_x = 70 #RealSenseの中心からのカメラズレ
-        error_px_y = 90 #手前方向にフライパンがあった時にきれいにアプローチできるようにする
-        neo_x = x - px_x - error_px_x #xローカル座標
+        error_px_y = 90 
+        neo_x = x - px_x - error_px_x 
         neo_y = y - px_y #yカメラ座標
         print("move_x:", neo_x, "move_y:", neo_y)
 
@@ -88,6 +88,17 @@ class ImageConvert(object):
             self.publisher_hsv_image_y.publish(neo_y)
 
         self.show(cv_image_color, hsv_image)
+
+    def Coordinate_x(value_x):
+        px_x = 640 / 2
+        error_px_x = 70
+        value_x = x - px_x - error_px_x 
+        return value_x
+
+    def Coordinate_y(value_y):
+        px_y = 480 / 2
+        value_y = y - px_y
+        return value_y
 
     #画像を表示する
     def show(self, image, hsv_image):
