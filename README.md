@@ -86,7 +86,7 @@ $ rosrun batting_robot ready.py
 [P]:引っ張り方向の構えに移行
 [S]:流し方向の構えに移行
 [F]:バットを置きverticalの姿勢に移行
-[S]:バッティング開始
+[G]:バッティング開始
 ```
 
 
