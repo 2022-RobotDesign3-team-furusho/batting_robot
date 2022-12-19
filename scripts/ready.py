@@ -4,6 +4,7 @@ import rospy
 import sys
 import actionlib
 import math
+import os
 from trajectory_msgs.msg import JointTrajectoryPoint
 from control_msgs.msg import GripperCommandAction,GripperCommandGoal
 from control_msgs.msg import FollowJointTrajectoryAction,FollowJointTrajectoryGoal
@@ -47,15 +48,11 @@ class Swing(object):
         rospy.sleep(sleep)
 
     #バットを探す姿勢にする
-    def search_position(self):
-
+    def set(self):
+        print("GO grab")
         global joint_values
-        print("batting start")
-        self.gripper_goal.command.position = math.radians(12.12)
-
-        print("構え")
         self.setup()
-        joint_values = [0.0, math.radians(-10), 0.0, math.radians(-90), 0.0, math.radians(-80), math.radians(-90)] #角度指定部
+        joint_values = [0.0, math.radians(0), 0.0, math.radians(-103), 0.0, math.radians(-80), math.radians(-90)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
     def feedback(self,msg):
@@ -64,14 +61,14 @@ class Swing(object):
 def main():
     completed = False
     arm_swing = Swing()
-
     if completed:
         pass
     else:
-        arm_swing.search_position()
+        arm_swing.set()
+        os.popen("rosrun batting_robot grab.py")
 
 if __name__ == '__main__':
     print("start")
-    rospy.init_node("swing")
+    rospy.init_node("ready")
     main()
     rospy.spin()

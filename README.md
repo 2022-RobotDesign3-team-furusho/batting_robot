@@ -10,83 +10,34 @@
 ## 動作確認済み環境
   * OS: Ubuntu 20.04.5LTS
   * ROS: Noetic Ninjemys
-  * RealSense
+  * Intel RealSense SDK 2.0
+  * OpenCV 4.5.1
 
 ---
 
-## 環境構築
+## セットアップ方法
 
-ROS1のインストール
+* OpenCVのインストール
 ```
-$ git clone https://github.com/ryuichiueda/ros_setup_scripts_Ubuntu20.04_desktop.git
-$ cd ros_setup_scripts_Ubuntu20.04_desktop/
-$ sudo apt update
-$ sudo apt upgrade
-$ ./locale.ja.bash
-$ ./step0.bash
-$ ./step1.bash
+$ wget --no-check-certificate https://raw.githubusercontent.com/milq/milq/master/scripts/bash/install-opencv.sh
+$ chmod +x install-opencv.sh
+$ ./install-opencv.sh
 ```
 
-動作確認
-```
-$ source ~/.bashrc
-$ roscore
-```
-
-ワークスペースを作成し~/.bashrcを編集
-```
-$ cd
-$ mkdir -p catkin_ws/src
-$ cd catkin_ws/src
-$ catkin_init_workspace
-Creating symlink "/home/ueda/catkin_ws/...
-$ cd ..
-$ catkin_make
-$ vim ~/.bashrc
-...
-source /opt/ros/noetic/setup.bash
-source ~/catkin_ws/devel/setup.bash       #この行を追加
-export ROS_MASTER_URI=http://localhost:11311
-...
-$ source ~/.bashrc
-$ cd ~/catkin_ws/
-$ catkin_make
-```
-
-CRANE-X7のROS1パッケージのインストール
-```
-$ cd ~/catkin_ws/src
-$ git clone https://github.com/rt-net/crane_x7_ros.git
-$ git clone https://github.com/rt-net/crane_x7_description.git
-$ git clone https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
-$ rosdep install -r -y --from-paths --ignore-src crane_x7_ros
-$ cd ~/catkin_ws/ 
-$ catkin_make
-```
-
-RVIZの動作確認
-```
-$ source ~/.bashrc
-$ roscore &
-$ rviz
-```
-
-GAZEBOの動作確認
-```
-$ mkdir ~/.ignition/fuel
-$ vi config.yaml
-config.yamlに以下を追加
-servers:
--
-  name: osrf
-  url: https://api.ignitionrobotics.org
-$ roslaunch crane_x7_gazebo crane_x7_with_table.launch
-```
-
-本パッケージのインストール
+* 本パッケージのインストール
 ```
 $ cd ~/catkin_ws/src
 $ git clone https://github.com/2022-RobotDesign3-team-furusho/batting_robot
+```
+
+* 株式会社アールティ様から配布されている crane_x7_ros をダウンロード
+```
+cd ~/catkin_ws/src
+git clone https://github.com/rt-net/crane_x7_ros.git
+```
+
+* ビルド
+```
 $ cd ~/catkin_ws
 $ catkin_make
 ```
@@ -95,15 +46,49 @@ $ catkin_make
 
 ## 実行方法（実機のみ）
 
-PCにUSBを接続し、/dev/ttyUSB0へのアクセス
+### バットの配置
+
+安全なバッティングを行うため以下のバットを以下の配置に置いて下さい。
+
+<img src = "https://user-images.githubusercontent.com/85381022/208228201-0811efe5-6967-4446-a335-874f53e00f22.png" width = "40%">
+
+### RealSenseの取り付け方法
+
+RealSenseは以下のように取り付けます。
+
+<img src = "https://user-images.githubusercontent.com/85381022/208228303-b1115b70-8dcb-4ab6-838f-cd98910c7edb.jpg" width = "30%">
+
+
+1. PCにUSBを接続し、/dev/ttyUSB0へのアクセス
 ```
 $ sudo chmod 666 /dev/ttyUSB0
 ```
 
-crane_x7を起動
+2. crane_x7を起動
 ```
 $ roslaunch crane_x7_bringup demo.launch fake_execution:=false
 ```
+
+3. RealSenseを立ち上げる
+```
+$ roslaunch realsense2_camera rs_camera.launch
+```
+
+4. 本パッケージの以下の２つのコードを順に実行する
+```
+$ rosrun batting_robot vision.py
+$ rosrun batting_robot ready.py
+```
+
+5. バットを掴んだ後キーボード入力から打ち方が決まる、バッティング後は`F`を入力するまでバッティングを続けられる
+```
+[C]:センター方向の構えに移行
+[P]:引っ張り方向の構えに移行
+[S]:流し方向の構えに移行
+[F]:バットを置きverticalの姿勢に移行
+[S]:バッティング開始
+```
+
 
 ---
 

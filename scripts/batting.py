@@ -51,16 +51,16 @@ class Swing(object):
 
         global joint_values
         print("batting start")
-        self.gripper_goal.command.position = math.radians(12.12)
+        self.gripper_goal.command.position = math.radians(10.10)
 
         print("構え")
         self.setup()
         joint_values = [0.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
-        print("[s]: バッティング開始")
+        print("[G]: バッティング開始")
         starat_center = input()
-        if starat_center == 's':
+        if starat_center == 'g':
 
             print("スイング")
             self.setup()
@@ -71,9 +71,9 @@ class Swing(object):
             joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
             self.setup2(0.1, 100.0, 1)
 
-
+            print("構え")
             self.setup()
-            joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
+            joint_values = [0.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
             self.setup2(3.0, 100.0, 1)
 
             return self._client.get_result()
@@ -82,16 +82,16 @@ class Swing(object):
     def go_pull(self):
         global joint_values
         print("batting start")
-        self.gripper_goal.command.position = math.radians(12.12)
+        self.gripper_goal.command.position = math.radians(10.10)
 
         print("構え")
         self.setup()
         joint_values = [math.radians(5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-40)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
-        print("[s]: バッティング開始")
+        print("[G]: バッティング開始")
         starat_center = input()
-        if starat_center == 's':
+        if starat_center == 'g':
 
             print("スイング")
             self.setup()
@@ -102,9 +102,9 @@ class Swing(object):
             joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-40)] #角度指定部
             self.setup2(0.1, 100.0, 1)
 
-
+            print("構え")
             self.setup()
-            joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
+            joint_values = [0.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
             self.setup2(3.0, 100.0, 1)
 
             return self._client.get_result()
@@ -113,16 +113,16 @@ class Swing(object):
     def go_sink(self):
         global joint_values
         print("batting start")
-        self.gripper_goal.command.position = math.radians(12.12)
+        self.gripper_goal.command.position = math.radians(10.10)
 
         print("構え")
         self.setup()
         joint_values = [math.radians(-5), math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-140)] #角度指定部
         self.setup2(3.0, 100.0, 1)
 
-        print("[s]: バッティング開始")
+        print("[G]: バッティング開始")
         starat_center = input()
-        if starat_center == 's':
+        if starat_center == 'g':
 
             print("スイング")
             self.setup()
@@ -133,12 +133,32 @@ class Swing(object):
             joint_values = [-1.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-140)] #角度指定部
             self.setup2(0.1, 100.0, 1)
 
-
+            print("構え")
             self.setup()
-            joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
+            joint_values = [0.0, math.radians(-10), 0.0, math.radians(-110), 0.0, math.radians(-59), math.radians(-90)] #角度指定部
             self.setup2(3.0, 100.0, 1)
 
             return self._client.get_result()
+
+    #バットを離してverticalの姿勢に戻る
+    def finish(self):
+        global joint_values
+        print("finish batting")
+        self.gripper_goal.command.position = math.radians(12.12)
+
+        effort  = 1
+        self.gripper_goal.command.position = math.radians(80.0)
+        self.gripper_goal.command.max_effort = effort
+
+        self.setup()
+        joint_values = [0.0, math.radians(-20), 0.0, math.radians(-130), 0.0, math.radians(-35), math.radians(-90)] #角度指定部
+        self.setup2(3.0, 100.0, 1)
+
+        self.gripper_goal.command.position = math.radians(0.0)
+
+        self.setup()
+        joint_values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #角度指定部
+        self.setup2(3.0, 100.0, 1)
 
     def feedback(self,msg):
         print("feedback callback")
@@ -151,20 +171,26 @@ def main():
         pass
     else:
         #打つ方向を決める文字入力
-        print("[c]: センター返し, [p]: 引っ張り, [s]:流し打ち")
-        input_key = input()
+        while True:
+            print("[c]: センター返し, [p]: 引っ張り, [s]:流し打ち, [f]:バッティング終了 " )
+            input_key = input()
 
-        if input_key == 'c':
-            print("center")
-            arm_swing.go_center()
+            if input_key == 'c':
+                print("center")
+                arm_swing.go_center()
 
-        if input_key == 'p':
-            print("pull")
-            arm_swing.go_pull()
+            if input_key == 'p':
+                print("pull")
+                arm_swing.go_pull()
 
-        if input_key == 's':
-            print("sink")
-            arm_swing.go_sink()
+            if input_key == 's':
+                print("sink")
+                arm_swing.go_sink()
+
+            if input_key == 'f':
+                print("finish")
+                arm_swing.finish()
+                break
 
 
 if __name__ == '__main__':
